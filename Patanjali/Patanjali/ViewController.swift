@@ -42,6 +42,7 @@ class ViewController: UIViewController
             else
             {
                 print("\(response)")
+                toastLabel(context: self, msg: response as! String)
             }
         }
     }

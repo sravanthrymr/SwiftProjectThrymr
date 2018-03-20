@@ -46,21 +46,21 @@ extension NSObject
         }
     }
 }
- func popUp(context ctx: UIViewController, msg: String) {
+ func toastLabel(context ctx: UIViewController, msg: String) {
+    
+    let heightOfLbl: CGFloat = heightForView(text: msg, font: UIFont.systemFont(ofSize: 20), width: ctx.view.frame.size.width - 80)
     let toast = UILabel(frame:
-        CGRect(x: 16, y: ctx.view.frame.size.height-120,
-               width: ctx.view.frame.size.width - 32, height: 60))
+        CGRect(x: 40, y: ctx.view.frame.size.height-heightOfLbl-100,
+               width: ctx.view.frame.size.width - 80, height: heightOfLbl))
     
     toast.backgroundColor = UIColor.lightGray
     toast.textColor = UIColor.white
     toast.textAlignment = .center;
     toast.numberOfLines = 0
-    toast.font = UIFont.systemFont(ofSize: 18)
-    toast.layer.cornerRadius = 12;
+    toast.font = UIFont.systemFont(ofSize: 16)
+    toast.layer.cornerRadius = 6;
     toast.clipsToBounds  =  true
-    
     toast.text = msg
-    
     ctx.view.addSubview(toast)
     
     UIView.animate(withDuration: 3.0, delay: 0.2,
@@ -70,18 +70,36 @@ extension NSObject
         toast.removeFromSuperview()
     })
 }
-/*extension UILabel {
+func heightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat{
+    let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
+    label.numberOfLines = 0
+    label.lineBreakMode = NSLineBreakMode.byWordWrapping
+    label.font = font
+    label.text = text
+    label.sizeToFit()
     
-    func autoresize() {
-        if let textNSString: NSString = self.text! as? NSString {
-            let rect = textNSString.boundingRect(with: CGSize(width:self.frame.size.width, height: CGFloat.greatestFiniteMagnitude),
-                                                         options: NSStringDrawingOptions.usesLineFragmentOrigin,
-                                                         attributes: [NSAttributedStringKey.font: self.font],
-                                                         context: nil)
-            self.frame = CGRect(x:self.frame.origin.x, y:self.frame.origin.y,width:self.frame.size.width,height:rect.height)
+    return label.frame.height
+}
+
+/*
+ extension UILabel
+{
+    var optimalHeight : CGFloat
+    {
+        get
+        {
+            let label = UILabel(frame:CGRect(x:0, y: 0, width: self.frame.width, height: CGFloat.greatestFiniteMagnitude))
+            label.numberOfLines = 0
+            label.lineBreakMode = self.lineBreakMode
+            label.font = self.font
+            label.text = self.text
+
+            label.sizeToFit()
+
+            return label.frame.height
         }
     }
-    
 }
- */
+*/
+
 
