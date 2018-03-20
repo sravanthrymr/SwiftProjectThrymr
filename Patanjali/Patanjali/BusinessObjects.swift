@@ -47,3 +47,14 @@ class structCategories: NSObject
     var arrProducts : NSMutableArray?
     var dataImage : Data?
 }
+class structLandingPage: NSObject
+{
+    var isSelected  : Bool = false
+    
+    var intId : NSInteger = 0
+    
+    var strTitle :  String?
+    var strCategory :  String?
+    
+    var arrProducts : NSMutableArray?
+}
