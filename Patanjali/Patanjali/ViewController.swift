@@ -97,13 +97,11 @@ class ViewController: UIViewController, UIScrollViewDelegate
     {
         scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * CGFloat(pageController.currentPage), y: 0), animated: true)
     }
-    public func scrollViewDidScroll(_ scrollView: UIScrollView)
-    {
-        print("exicuted")
-    }
     public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView)
     {
-        pageController.currentPage = Int(scrollView.contentOffset.x/scrollView.frame.size.width)
+        DispatchQueue.main.async {
+            self.pageController.currentPage = Int(scrollView.contentOffset.x/scrollView.frame.size.width)
+        }
     }
     override func didReceiveMemoryWarning()
     {

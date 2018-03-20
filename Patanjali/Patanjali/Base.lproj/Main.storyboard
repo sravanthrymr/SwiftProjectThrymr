@@ -28,15 +28,15 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFm-BY-ae1">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                         <connections>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="1SL-oQ-n10"/>
                                         </connections>
                                     </scrollView>
                                     <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qtT-DU-1gC">
-                                        <rect key="frame" x="0.0" y="160" width="320" height="20"/>
+                                        <rect key="frame" x="0.0" y="150" width="320" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="gQh-9i-hv6"/>
+                                            <constraint firstAttribute="height" constant="30" id="gQh-9i-hv6"/>
                                         </constraints>
                                         <color key="pageIndicatorTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="currentPageIndicatorTintColor" red="0.50980392159999999" green="0.73333333329999995" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -53,7 +53,7 @@
                                     <constraint firstAttribute="trailing" secondItem="qtT-DU-1gC" secondAttribute="trailing" id="DA4-kZ-Ll4"/>
                                     <constraint firstAttribute="height" constant="180" id="GKg-dr-S6h"/>
                                     <constraint firstAttribute="bottom" secondItem="Gy4-2f-fvp" secondAttribute="bottom" id="PKX-EI-Pea"/>
-                                    <constraint firstAttribute="bottom" secondItem="tFm-BY-ae1" secondAttribute="bottom" constant="20" id="RUU-fG-TOu"/>
+                                    <constraint firstAttribute="bottom" secondItem="tFm-BY-ae1" secondAttribute="bottom" constant="30" id="RUU-fG-TOu"/>
                                     <constraint firstAttribute="trailing" secondItem="Gy4-2f-fvp" secondAttribute="trailing" id="WnN-8O-IeX"/>
                                     <constraint firstItem="Gy4-2f-fvp" firstAttribute="leading" secondItem="lKf-oV-Aut" secondAttribute="leading" id="hxj-CC-kTY"/>
                                     <constraint firstItem="tFm-BY-ae1" firstAttribute="leading" secondItem="lKf-oV-Aut" secondAttribute="leading" id="izF-gc-NO4"/>
