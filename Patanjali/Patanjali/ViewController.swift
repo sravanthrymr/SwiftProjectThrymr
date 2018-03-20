@@ -54,14 +54,14 @@ class ViewController: UIViewController, UIScrollViewDelegate
     {
         let dicResponseData = response.value(forKey: "data") as! NSDictionary
         let arrPromotionBanners = dicResponseData.value(forKey: "promotionBanners") as! NSArray
-        let arrPromotionBannersTemp = JsonConverter.sharedInstance.getBannersData(withData: arrPromotionBanners) as NSArray
+        let arrPromotionBannersTemp = JsonConverter.sharedInstance.getBannersData(withData: arrPromotionBanners)
         if (arrBanners != nil)
         {
             arrBanners.addObjects(from:arrPromotionBannersTemp as [AnyObject])
         }
         else if (arrBanners == nil)
         {
-            arrBanners = arrPromotionBannersTemp.mutableCopy () as! NSMutableArray
+            arrBanners = arrPromotionBannersTemp
         }
         print("\(arrBanners!)")
         
