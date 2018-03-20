@@ -26,8 +26,23 @@ class ViewController: UIViewController
     func callServiceForLandingPage() -> Void
     {
         Services.sharedInstatnce.Service_CallWithData(withParameters: nil, withMethodName: .landingPage) { (response, error, isSuccess) in
-            
-            isSuccess ? print("success") : popUp(context: self, msg:response as! String) ///print("fail")
+            isSuccess ? print("success") : print("fail")
+
+            if isSuccess == true
+            {
+                let dicResponse = response as! NSDictionary
+                let dataResponse : Data = try! JSONSerialization.data(withJSONObject: dicResponse, options: .prettyPrinted)
+                let strResponse = String(data: dataResponse, encoding: .utf8)!
+                if strResponse.count > 0
+                {
+                    UserDefaults.standard.set(strResponse, forKey: DASHBOARD_RESPONSE)
+                }
+                self.handleDashBoardResponse(response: dicResponse)
+            }
+            else
+            {
+                print("\(response)")
+            }
         }
     }
      // MARK: Handle Landingpage Response
