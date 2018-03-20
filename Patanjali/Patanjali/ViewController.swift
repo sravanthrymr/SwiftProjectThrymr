@@ -14,7 +14,7 @@ class ViewController: UIViewController, UIScrollViewDelegate
     @IBOutlet weak var viewScrollBg: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imgViewBanner: UIImageView!
-    var arrBanners : NSMutableArray!
+    var arrBanners : NSMutableArray = []
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -45,6 +45,7 @@ class ViewController: UIViewController, UIScrollViewDelegate
             else
             {
                 print("\(response)")
+                toastLabel(context: self, msg: response as! String)
             }
         }
     }
@@ -53,7 +54,8 @@ class ViewController: UIViewController, UIScrollViewDelegate
     {
         let dicResponseData = response.value(forKey: "data") as! NSDictionary
         let arrPromotionBanners = dicResponseData.value(forKey: "promotionBanners") as! NSArray
-        arrBanners = JsonConverter.sharedInstance.getBannersData(withData: arrPromotionBanners)
+        let arrPromotionBannersTemp = JsonConverter.sharedInstance.getBannersData(withData: arrPromotionBanners)
+        arrBanners.addObjects(from:arrPromotionBannersTemp as [AnyObject])
         print("\(arrBanners)")
         
         if(arrBanners.count > 0)
