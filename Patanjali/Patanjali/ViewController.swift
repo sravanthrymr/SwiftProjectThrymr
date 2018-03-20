@@ -14,7 +14,7 @@ class ViewController: UIViewController, UIScrollViewDelegate
     @IBOutlet weak var viewScrollBg: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imgViewBanner: UIImageView!
-    var arrBanners : NSMutableArray!
+    var arrBanners : NSMutableArray = []
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -55,15 +55,8 @@ class ViewController: UIViewController, UIScrollViewDelegate
         let dicResponseData = response.value(forKey: "data") as! NSDictionary
         let arrPromotionBanners = dicResponseData.value(forKey: "promotionBanners") as! NSArray
         let arrPromotionBannersTemp = JsonConverter.sharedInstance.getBannersData(withData: arrPromotionBanners)
-        if (arrBanners != nil)
-        {
-            arrBanners.addObjects(from:arrPromotionBannersTemp as [AnyObject])
-        }
-        else if (arrBanners == nil)
-        {
-            arrBanners = arrPromotionBannersTemp
-        }
-        print("\(arrBanners!)")
+        arrBanners.addObjects(from:arrPromotionBannersTemp as [AnyObject])
+        print("\(arrBanners)")
         
         if(arrBanners.count > 0)
         {
