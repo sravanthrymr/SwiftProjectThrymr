@@ -65,6 +65,30 @@ class ViewController: UIViewController, UIScrollViewDelegate
                 self.designBannerView()
             }
         }
+        
+//        let arrProductsList  = dicResponseData.value(forKey: "productsList") as! NSArray
+//
+//        for <#item#> in <#items#> {
+//            <#code#>
+//        }
+        /*
+         
+         for (NSDictionary *dic in arrProductsList)
+         {
+         structLandingPage *objStruct = [[structLandingPage alloc] init];
+         objStruct.intId = [[dic safeObjectForKey:@"id"] integerValue];
+         objStruct.strTitle = [dic safeObjectForKey:@"title"];
+         objStruct.strCategory = [dic safeObjectForKey:@"category"];
+         objStruct.arrProducts = [[NSMutableArray alloc] init];
+         NSArray *arrProductsResponse = [dic safeObjectForKey:@"products"];
+         NSMutableArray *arrProductsDataTemp = [[JsonConverter sharedInstance] getProductsData:arrProductsResponse];
+         [objStruct.arrProducts addObjectsFromArray:arrProductsDataTemp];
+         if(objStruct.arrProducts.count > 0)
+         [arrLandingProductsData addObject:objStruct];
+         }
+*/
+        
+        
     }
        // MARK: Design Banners View
     func designBannerView() -> Void
@@ -99,7 +123,7 @@ class ViewController: UIViewController, UIScrollViewDelegate
     {
         scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * CGFloat(pageController.currentPage), y: 0), animated: true)
     }
-    public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView)
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
     {
         DispatchQueue.main.async {
             self.pageController.currentPage = Int(scrollView.contentOffset.x/scrollView.frame.size.width)
