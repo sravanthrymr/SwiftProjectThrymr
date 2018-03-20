@@ -62,6 +62,12 @@ class Services: NSObject
     // MARK: ***** Service_CallWithData
     func Service_CallWithData(withParameters dicParameters : Any?,  withMethodName methodName:apiMethodName, complitionHandler : @escaping ComplitionHandler)
     {
+        if(!checkNet())
+        {
+            complitionHandler("Please check your Internet connection.", nil, false);
+            return;
+        }
+ 
         let jsonData : Data? = convertRequest(withApiMethodName: methodName, withObject: dicParameters)
 
         let urlString = "\(BaseUrl)\(getURLforMethod(methodName))"

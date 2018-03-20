@@ -27,7 +27,7 @@ class ViewController: UIViewController
     {
         Services.sharedInstatnce.Service_CallWithData(withParameters: nil, withMethodName: .landingPage) { (response, error, isSuccess) in
             
-            isSuccess ? print("success") : print("fail")
+            isSuccess ? print("success") : popUp(context: self, msg:response as! String) ///print("fail")
         }
     }
     override func didReceiveMemoryWarning()
