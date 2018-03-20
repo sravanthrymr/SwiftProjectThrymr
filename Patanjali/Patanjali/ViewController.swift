@@ -30,6 +30,15 @@ class ViewController: UIViewController
             isSuccess ? print("success") : popUp(context: self, msg:response as! String) ///print("fail")
         }
     }
+     // MARK: Handle Landingpage Response
+    func handleDashBoardResponse(response:NSDictionary) -> Void
+    {
+        let dicResponseData = response.value(forKey: "data") as! NSDictionary
+        let arrPromotionBanners = dicResponseData.value(forKey: "promotionBanners") as! NSArray
+        let arrPromotionBannersDataTemp = JsonConverter.sharedInstance.getBannersData(withData: arrPromotionBanners)
+        print("\(arrPromotionBannersDataTemp)")
+        
+    }
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
