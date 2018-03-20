@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,30 +21,45 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKf-oV-Aut">
-                                <rect key="frame" x="0.0" y="20" width="320" height="150"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="180"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tFm-BY-ae1">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="patanjalibannerWithCaption" translatesAutoresizingMaskIntoConstraints="NO" id="Gy4-2f-fvp">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFm-BY-ae1">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="1SL-oQ-n10"/>
+                                        </connections>
                                     </scrollView>
-                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="qtT-DU-1gC">
-                                        <rect key="frame" x="0.0" y="130" width="320" height="20"/>
+                                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qtT-DU-1gC">
+                                        <rect key="frame" x="0.0" y="160" width="320" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="gQh-9i-hv6"/>
                                         </constraints>
                                         <color key="pageIndicatorTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="currentPageIndicatorTintColor" red="0.50980392159999999" green="0.73333333329999995" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="pageControllerClicked:" destination="BYZ-38-t0r" eventType="valueChanged" id="W5w-ny-DM3"/>
+                                        </connections>
                                     </pageControl>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="qtT-DU-1gC" firstAttribute="leading" secondItem="lKf-oV-Aut" secondAttribute="leading" id="4cB-8T-Iq3"/>
                                     <constraint firstAttribute="bottom" secondItem="qtT-DU-1gC" secondAttribute="bottom" id="BJq-gw-VIE"/>
                                     <constraint firstAttribute="trailing" secondItem="qtT-DU-1gC" secondAttribute="trailing" id="DA4-kZ-Ll4"/>
-                                    <constraint firstAttribute="height" constant="150" id="GKg-dr-S6h"/>
-                                    <constraint firstAttribute="bottom" secondItem="tFm-BY-ae1" secondAttribute="bottom" id="RUU-fG-TOu"/>
+                                    <constraint firstAttribute="height" constant="180" id="GKg-dr-S6h"/>
+                                    <constraint firstAttribute="bottom" secondItem="Gy4-2f-fvp" secondAttribute="bottom" id="PKX-EI-Pea"/>
+                                    <constraint firstAttribute="bottom" secondItem="tFm-BY-ae1" secondAttribute="bottom" constant="20" id="RUU-fG-TOu"/>
+                                    <constraint firstAttribute="trailing" secondItem="Gy4-2f-fvp" secondAttribute="trailing" id="WnN-8O-IeX"/>
+                                    <constraint firstItem="Gy4-2f-fvp" firstAttribute="leading" secondItem="lKf-oV-Aut" secondAttribute="leading" id="hxj-CC-kTY"/>
                                     <constraint firstItem="tFm-BY-ae1" firstAttribute="leading" secondItem="lKf-oV-Aut" secondAttribute="leading" id="izF-gc-NO4"/>
                                     <constraint firstItem="tFm-BY-ae1" firstAttribute="top" secondItem="lKf-oV-Aut" secondAttribute="top" id="jW3-on-924"/>
                                     <constraint firstAttribute="trailing" secondItem="tFm-BY-ae1" secondAttribute="trailing" id="v1R-GD-Y1s"/>
+                                    <constraint firstItem="Gy4-2f-fvp" firstAttribute="top" secondItem="lKf-oV-Aut" secondAttribute="top" id="xWV-R0-oWV"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -62,6 +76,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="imgViewBanner" destination="Gy4-2f-fvp" id="Fh1-fV-h50"/>
                         <outlet property="pageController" destination="qtT-DU-1gC" id="3FJ-wa-lpd"/>
                         <outlet property="scrollView" destination="tFm-BY-ae1" id="EiT-pl-yCW"/>
                         <outlet property="viewScrollBg" destination="lKf-oV-Aut" id="FKJ-hH-ioV"/>
@@ -74,5 +89,6 @@
     </scenes>
     <resources>
         <image name="bg" width="360" height="640"/>
+        <image name="patanjalibannerWithCaption" width="320" height="120"/>
     </resources>
 </document>
