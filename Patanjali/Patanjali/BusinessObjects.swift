@@ -16,34 +16,34 @@ class structLogin: NSObject
 
 class structPromotionBanners: NSObject
 {
-    var strImageName = ""
-    var strId  = ""
-    var intCreatedDate  = 0
-    var intUpdateDate  = 0
+    var strImageName :  String?
+    var strId :  String?
+    var intCreatedDate  : NSInteger? = 0
+    var intUpdateDate  : NSInteger? = 0
     
-    var strTitle = ""
-    var strBannerUrl = ""
-    var strDescription = ""
-    var strDisplayOrder = ""
-    var isActive = false
+    var strTitle:  String?
+    var strBannerUrl :  String?
+    var strDescription:  String?
+    var strDisplayOrder :  String?
+    var isActive : Bool? = false
     var structCategory : structCategories?
     var structSubCategory: structCategories?
 }
 class structCategories: NSObject
 {
-    var isSelected = false
-    var isActive = false
-    var isArticle = false
+    var isSelected  : Bool = false
+    var isActive  : Bool = false
+    var isArticle  : Bool = false
     
-    var createdDate = 0
-    var updateDate = 0
+    var createdDate : NSInteger = 0
+    var updateDate : NSInteger = 0
     
-    var strFileUrl = ""
-    var strIconUrl = ""
-    var strName = ""
-    var strId = ""
-    var strDescription = ""
+    var strFileUrl :  String?
+    var strIconUrl :  String?
+    var strName :  String?
+    var strId :  String?
+    var strDescription :  String?
     
-    var arrProducts : NSMutableArray = []
+    var arrProducts : NSMutableArray?
     var dataImage : Data?
 }
