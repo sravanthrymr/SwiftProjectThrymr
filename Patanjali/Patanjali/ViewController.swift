@@ -66,11 +66,24 @@ class ViewController: UIViewController, UIScrollViewDelegate
             }
         }
         
-//        let arrProductsList  = dicResponseData.value(forKey: "productsList") as! NSArray
-//
-//        for <#item#> in <#items#> {
-//            <#code#>
-//        }
+        let arrProductsList  = dicResponseData.safeObjectForKey(key: "productsList") as? NSArray
+
+        for dic : Any in arrProductsList!
+        {
+           if dic is NSDictionary
+           {
+            let dicProduct = dic as! NSDictionary
+            
+            let objStruct = structLandingPage()
+            objStruct.intId = dicProduct.safeObjectForKey(key: "id") as? NSInteger
+            objStruct.strTitle = dicProduct.safeObjectForKey(key: "title") as? String
+            objStruct.strCategory = dicProduct.safeObjectForKey(key: "category") as? String
+            objStruct.arrProducts = []
+
+            let arrProductsResponse = dicProduct.value(forKey: "products") as? NSArray
+//            let arrProductsTemp = JsonConverter.sharedInstance
+            }
+       }
         /*
          
          for (NSDictionary *dic in arrProductsList)
@@ -125,7 +138,8 @@ class ViewController: UIViewController, UIScrollViewDelegate
     }
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
     {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async
+        {
             self.pageController.currentPage = Int(scrollView.contentOffset.x/scrollView.frame.size.width)
         }
     }
