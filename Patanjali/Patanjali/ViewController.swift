@@ -30,7 +30,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
         }
     }
     
-    // MARK: Service call for Landing page
+    // MARK: ---Service call for Landing page
     func callServiceForLandingPage() -> Void
     {
         Services.sharedInstatnce.Service_CallWithData(withParameters: nil, withMethodName: .landingPage) { (response, error, isSuccess) in
@@ -54,7 +54,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
             }
         }
     }
-    // MARK: Handle Landingpage Response
+    // MARK: ---Handle Landingpage Response
     func handleDashBoardResponse(response:NSDictionary) -> Void
     {
         let dicResponseData = response.value(forKey: "data") as! NSDictionary
@@ -88,7 +88,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
                 let arrProductsResponse = dicProduct.value(forKey: "products") as? NSArray
                 if arrProductsResponse != nil
                 {
-                    let arrProductsTemp = JsonConverter.sharedInstance.getBannersData(withData: arrProductsResponse!)
+                    let arrProductsTemp = JsonConverter.sharedInstance.getProductsData(withData: arrProductsResponse!)
                     objStruct.arrProducts .addObjects(from: arrProductsTemp as! [Any])
                 }
                 if objStruct.arrProducts.count > 0
@@ -103,7 +103,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
         }
         
     }
-    // MARK: Design Banners View
+    // MARK: ---Design Banners View
     func designBannerView() -> Void
     {
         DispatchQueue.main.async {
@@ -132,7 +132,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
             self.pageController.numberOfPages = self.arrBanners.count
         }
     }
-    //MARK: UIScrollView Delegates
+    //MARK: --- UIScrollView Delegates
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
     {
         DispatchQueue.main.async
@@ -140,7 +140,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
                 self.pageController.currentPage = Int(scrollView.contentOffset.x/scrollView.frame.size.width)
         }
     }
-    //MARK: UITableView Delegates
+    //MARK: --- UITableView Delegates
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
         return 50
@@ -182,6 +182,9 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
     {
         let cellIdentifier = "cellHome"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! HomeTableViewCell
+        
+        let objStruct = arrLandingProductsData[indexPath.section] as! structLandingPage
+        cell.setData(withProducts: objStruct.arrProducts as! [structProduct])
         return cell
     }
     public func numberOfSections(in tableView: UITableView) -> Int

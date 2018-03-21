@@ -49,6 +49,8 @@
 		E5B6C902206266B000A87481 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5B6C8DC206266B000A87481 /* Roboto-Thin.ttf */; };
 		E5B6C903206266B000A87481 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5B6C8DD206266B000A87481 /* Roboto-Black.ttf */; };
 		E5B6C904206266B000A87481 /* RobotoSlab-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5B6C8DE206266B000A87481 /* RobotoSlab-Regular.ttf */; };
+		E5B6C9092062856500A87481 /* ProductCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E5B6C9082062856500A87481 /* ProductCollectionViewCell.xib */; };
+		E5B6C90B2062856F00A87481 /* ProductCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6C90A2062856F00A87481 /* ProductCollectionViewCell.swift */; };
 		E5F78EE62060D49D006DEC28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F78EE52060D49D006DEC28 /* AppDelegate.swift */; };
 		E5F78EE82060D49D006DEC28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F78EE72060D49D006DEC28 /* ViewController.swift */; };
 		E5F78EEB2060D49D006DEC28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5F78EE92060D49D006DEC28 /* Main.storyboard */; };
@@ -105,6 +107,8 @@
 		E5B6C8DC206266B000A87481 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		E5B6C8DD206266B000A87481 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		E5B6C8DE206266B000A87481 /* RobotoSlab-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoSlab-Regular.ttf"; sourceTree = "<group>"; };
+		E5B6C9082062856500A87481 /* ProductCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCollectionViewCell.xib; sourceTree = "<group>"; };
+		E5B6C90A2062856F00A87481 /* ProductCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewCell.swift; sourceTree = "<group>"; };
 		E5F78EE22060D49D006DEC28 /* Patanjali.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patanjali.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5F78EE52060D49D006DEC28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5F78EE72060D49D006DEC28 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +137,7 @@
 		E5B6C8AE2062578E00A87481 /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
+				E5B6C9072062856500A87481 /* ProductCollectionViewCell */,
 				E5B6C8AF206257AD00A87481 /* DashboardTableviewCell */,
 			);
 			path = CustomCells;
@@ -213,6 +218,15 @@
 				E5B6C8DE206266B000A87481 /* RobotoSlab-Regular.ttf */,
 			);
 			path = CustomFonts;
+			sourceTree = "<group>";
+		};
+		E5B6C9072062856500A87481 /* ProductCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				E5B6C9082062856500A87481 /* ProductCollectionViewCell.xib */,
+				E5B6C90A2062856F00A87481 /* ProductCollectionViewCell.swift */,
+			);
+			path = ProductCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		E5F78ED92060D49D006DEC28 = {
@@ -360,6 +374,7 @@
 				E5B6C904206266B000A87481 /* RobotoSlab-Regular.ttf in Resources */,
 				E5B6C8F6206266B000A87481 /* Roboto-ThinItalic.ttf in Resources */,
 				E5B6C8E2206266B000A87481 /* sample2.png in Resources */,
+				E5B6C9092062856500A87481 /* ProductCollectionViewCell.xib in Resources */,
 				E5B6C8FC206266B000A87481 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				E5B6C8FF206266B000A87481 /* OpenSans-Regular.ttf in Resources */,
 				E5B6C8E4206266B000A87481 /* Roboto-Medium.ttf in Resources */,
@@ -383,6 +398,7 @@
 				E5F78F062060E4A4006DEC28 /* JsonConverter.swift in Sources */,
 				8618866E2061161E007E4E6E /* Reachability.swift in Sources */,
 				E5F78EE62060D49D006DEC28 /* AppDelegate.swift in Sources */,
+				E5B6C90B2062856F00A87481 /* ProductCollectionViewCell.swift in Sources */,
 				E5B6C8B3206261AC00A87481 /* Defaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
