@@ -197,10 +197,6 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
     {
         print("\(btn.tag)")
     }
-    @objc func btnMenuClicked(sender : UIButton) -> Void
-    {
-        
-    }
     @IBAction func pageControllerClicked(_ sender: Any)
     {
         scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * CGFloat(pageController.currentPage), y: 0), animated: true)
