@@ -110,7 +110,6 @@ func heightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat
     
     return label.frame.height
 }
-
 /*
  extension UILabel
 {

@@ -175,7 +175,7 @@ public class Reachability {
 
 public extension Reachability {
     
-    // MARK: - *** Notifier methods ***
+    // MARK: ---- *** Notifier methods ***
     func startNotifier() throws {
         
         guard !notifierRunning else { return }
@@ -207,7 +207,7 @@ public extension Reachability {
         SCNetworkReachabilitySetDispatchQueue(reachabilityRef, nil)
     }
     
-    // MARK: - *** Connection test methods ***
+    // MARK: ---- *** Connection test methods ***
     @available(*, deprecated: 4.0, message: "Please use `connection != .none`")
     var isReachable: Bool {
         

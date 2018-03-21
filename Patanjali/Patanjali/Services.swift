@@ -11,7 +11,7 @@ import Foundation
 typealias ComplitionHandler = (_ response: Any, _ error: Error?, _ isSuccess: Bool) -> Void
 class Services: NSObject
 {
-    // MARK: ***** Shared Instatnce
+    // MARK: --- Shared Instatnce
     class var sharedInstatnce: Services
     {
         struct  Static
@@ -20,7 +20,7 @@ class Services: NSObject
         }
         return Static.instance
     }
-    // MARK: ***** get URL for Method
+    // MARK: --- get URL for Method
 
     func getURLforMethod(_ MethodName: apiMethodName ) -> String
     {
@@ -38,7 +38,7 @@ class Services: NSObject
         return url
     }
   
-    // MARK: ***** Header methods
+    // MARK: --- Header methods
     func getHeaders(_ methodName: apiMethodName, with request: NSMutableURLRequest) -> NSMutableURLRequest
     {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -59,7 +59,7 @@ class Services: NSObject
         return request
     }
 
-    // MARK: ***** Service_CallWithData
+    // MARK: --- Service_CallWithData
     func Service_CallWithData(withParameters dicParameters : Any?,  withMethodName methodName:apiMethodName, complitionHandler : @escaping ComplitionHandler)
     {
         if(!checkNet())
@@ -135,7 +135,7 @@ class Services: NSObject
         sessionTask.resume()
     }
 
-    // MARK: ***** Convert Request
+    // MARK: --- Convert Request
     func convertRequest(withApiMethodName methodName:apiMethodName, withObject object:Any?) -> Data?
     {
         let objJsonConverter = JsonConverter.sharedInstance
