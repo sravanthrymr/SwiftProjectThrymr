@@ -11,27 +11,19 @@ import UIKit
 class ProductCategoryController: UIViewController {
     
     @IBOutlet weak var imgViewHome: UIImageView!
-    @IBOutlet weak var bgView: UIView?
+    @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var lblHome: UILabel!
-    @IBOutlet weak var placeHolderView: UIView?
+    @IBOutlet weak var placeHolderView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
     var str:NSString!
     var open: Bool! = false
     
-    
-    class var sharedInstance: ProductCategoryController
-    {
-        struct Static
-        {
-            static let instance: ProductCategoryController = ProductCategoryController()
-        }
-        return Static.instance
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    static let sharedInstance = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ProductCategoryController")  as! ProductCategoryController
 
-        // Do any additional setup after loading the view.
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
     }
     // MARK : To open side menu
     func openMenu()
@@ -48,9 +40,9 @@ class ProductCategoryController: UIViewController {
                 var newFrame: CGRect = frame
                 newFrame.origin.x = 0;
                 self.view.frame = newFrame;
-                self.bgView?.transform = CGAffineTransform.identity
+                self.bgView.transform = CGAffineTransform.identity
             })
-            self.placeHolderView?.isHidden = false
+            self.placeHolderView.isHidden = false
         }
     }
     // MARK : To close the side menu
@@ -65,17 +57,22 @@ class ProductCategoryController: UIViewController {
                 var newFrame: CGRect = frame
                 newFrame.origin.x = -screenWidth
                 self.view.frame = newFrame;
-                self.bgView?.transform = CGAffineTransform.init(translationX: -SCREEN_WIDTH, y: 0)
+                self.bgView.transform = CGAffineTransform.init(translationX: -SCREEN_WIDTH, y: 0)
             }, completion: { (finished) in
                 self.view .removeFromSuperview()
             })
-            self.placeHolderView?.isHidden = true;
+            self.placeHolderView.isHidden = true;
             
         }
     }
+    //MARK: UIbutton Actions
+    @IBAction func btnHomeClicked(_ sender: Any)
+    {
+        closeMenu()
+    }
     
-    
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
