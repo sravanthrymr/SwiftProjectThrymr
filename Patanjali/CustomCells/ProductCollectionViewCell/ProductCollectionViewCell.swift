@@ -24,20 +24,14 @@ class ProductCollectionViewCell: UICollectionViewCell
         
         lblNoData.layer.borderColor = COLORTEXT_GRAY.cgColor;
         
-        lblNoData.font = setRandomFont(withSize: 13.0, withFontName: FONTROBOTO_REGULAR)
+        lblNoData.font = setRandomFont(withSize: 13.0, withFontName: FONTOPENSANS_REGULAR)
         lblNoData.layer.borderWidth = 1.0
         lblNoData.layer.cornerRadius = 5.0
 
-      lblProductQty.attributedText = setAttrStrForProductUnits(str1: "1000", str2: "ml")
-        //lblProductCost.text = [NSString stringWithFormat: @"\u20b9 %d",850];
-        //
-        //lblProductName.font = [UIFont randomFontwithSize:10.0f fontName:FONTROBOTO_REGULAR];
-        //lblProductQty.font = [UIFont randomFontwithSize:10.0f fontName:FONTROBOTO_REGULAR];
-        //lblProductCost.font = [UIFont randomFontwithSize:10.0f fontName:FONTROBOTO_REGULAR];
-
+        lblProductName.font = setRandomFont(withSize: 10.0, withFontName: FONTOPENSANS_REGULAR)
+        lblProductQty.font = setRandomFont(withSize: 10.0, withFontName: FONTOPENSANS_REGULAR)
+        lblProductCost.font = setRandomFont(withSize: 10.0, withFontName: FONTOPENSANS_REGULAR)
     }
-    
-
 
     @IBAction func btnActionProductRating(_ sender: Any)
     {

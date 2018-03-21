@@ -37,7 +37,7 @@ class HomeTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollection
     
     let objStructProduct = arrProducts[indexPath.item] as! structProduct
     
-    cell.lblProductQty.attributedText = NSAttributedString(string: "")
+    cell.lblProductQty.attributedText = setAttrStrForProductUnits(str1:objStructProduct.weight!, str2:String(format:" %@", objStructProduct.weightUnit!))
     cell.lblProductName.text = objStructProduct.name
  
     cell.lblProductCost.text = String(format: "\u{20b9} %.2f", objStructProduct.price!)
@@ -48,7 +48,7 @@ class HomeTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return CGSize(width:600, height: CGFloat(200))
+        return CGSize(width:400, height: CGFloat(300))
     }
     override func setSelected(_ selected: Bool, animated: Bool)
     {
