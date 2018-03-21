@@ -46,7 +46,10 @@ class HomeTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollection
     return cell
    }
     
-
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize
+    {
+        return CGSize(width:600, height: CGFloat(200))
+    }
     override func setSelected(_ selected: Bool, animated: Bool)
     {
         super.setSelected(selected, animated: animated)

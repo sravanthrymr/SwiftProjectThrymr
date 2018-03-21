@@ -28,7 +28,7 @@ class ProductCollectionViewCell: UICollectionViewCell
         lblNoData.layer.borderWidth = 1.0
         lblNoData.layer.cornerRadius = 5.0
 
-//       lblProductQty.attributedText = [Utils setAttrStrForProductUnits:@"0 " fontString:@"ml"];
+      lblProductQty.attributedText = setAttrStrForProductUnits(str1: "1000", str2: "ml")
         //lblProductCost.text = [NSString stringWithFormat: @"\u20b9 %d",850];
         //
         //lblProductName.font = [UIFont randomFontwithSize:10.0f fontName:FONTROBOTO_REGULAR];
