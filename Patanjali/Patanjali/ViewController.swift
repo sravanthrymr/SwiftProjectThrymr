@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSource
+class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate
 {
     @IBOutlet weak var pageController: UIPageControl!
     @IBOutlet weak var viewScrollBg: UIView!
@@ -141,9 +141,38 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
         }
     }
     //MARK: UITableView Delegates
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
+        return 50
+    }
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        let viewHeader = UIView()
+        viewHeader.frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width - 80, height: 50)
+        viewHeader.backgroundColor = UIColor.clear
+        
+        let objStruct = arrLandingProductsData[section] as! structLandingPage
+        let lblTitle = UILabel()
+        lblTitle.frame = CGRect(x: 10, y: 5, width: tblView.frame.size.width, height: 40)
+        lblTitle.text = objStruct.strTitle
+        lblTitle.textColor = COLORSELECTED
+        lblTitle.minimumScaleFactor = 0.6
+        lblTitle.font = setRandomFont(withSize: 15.0, withFontName: FONTOPENSANS_BOLD)
+        viewHeader .addSubview(lblTitle)
+        
+        let buttonSeeAll = UIButton.init(type: .custom)
+        buttonSeeAll.frame = CGRect(x: tblView.frame.size.width - 70, y: 5, width: 60, height: 40)
+        buttonSeeAll .setTitle("See All", for: .normal)
+        buttonSeeAll.setTitleColor(UIColor.gray, for: .normal)
+       buttonSeeAll .titleLabel?.font = setRandomFont(withSize: 15.0, withFontName: FONTOPENSANS_BOLD)
+        buttonSeeAll .addTarget(self, action: #selector(buttonSeeAllClicked), for: .touchUpInside)
+        buttonSeeAll.tag = section
+        viewHeader .addSubview(buttonSeeAll)
+        return viewHeader
+    }
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return arrLandingProductsData.count
+        return 1
     }
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
@@ -160,6 +189,15 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
         return arrLandingProductsData.count
     }
     //MARK: UIButton Actions
+
+    @objc func buttonSeeAllClicked(btn: UIButton) -> Void
+    {
+        print("\(btn.tag)")
+    }
+    @objc func btnMenuClicked(sender : UIButton) -> Void
+    {
+        
+    }
     @IBAction func pageControllerClicked(_ sender: Any)
     {
         scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * CGFloat(pageController.currentPage), y: 0), animated: true)

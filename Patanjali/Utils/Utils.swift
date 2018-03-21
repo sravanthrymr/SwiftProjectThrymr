@@ -11,7 +11,8 @@ import UIKit
 
 extension NSObject
 {
-    func checkNet() -> Bool {
+    func checkNet() -> Bool
+    {
         let reachability = Reachability()
         let status = reachability?.connection
         print("Connection status:",status! )
@@ -30,10 +31,6 @@ extension NSObject
             return false
         }
     }
-    
-}
-extension NSObject
-{
     func safeObjectForKey(key : String) -> Any?
     {
         if self.value(forKey: key) is NSNull
@@ -46,7 +43,39 @@ extension NSObject
         }
     }
 }
- func toastLabel(context ctx: UIViewController, msg: String) {
+    func setRandomFont(withSize size : CGFloat, withFontName fontName: String) -> UIFont
+    {
+        var font : UIFont!
+        if SCREEN_HEIGHT ==  CGFloat(IPHONE_4_SCREEN_HEIGHT)
+        {
+            font = UIFont(name: fontName, size: size)!
+        }
+        else if (SCREEN_HEIGHT == CGFloat(IPHONE_5_SCREEN_HEIGHT)) // iPhone 5,5S, SE
+        {
+             font = UIFont(name: fontName, size: size+1)!
+        }
+        else if (SCREEN_WIDTH == CGFloat(IPHONE_6_SCREEN_WIDTH)) // iPhone 6, 6S, 7
+        {
+             font = UIFont(name: fontName, size: size+2)!
+        }
+        else if (SCREEN_WIDTH == CGFloat(IPHONE_6PLUS_SCREEN_WIDTH)) // iPhone 6 Plus, 6s Plus, 7 Plus
+        {
+             font = UIFont(name: fontName, size: size+4)!
+        }
+        else if (SCREEN_WIDTH == CGFloat(768)) // iPad
+        {
+             font = UIFont(name: fontName, size: size+5)!
+        }
+        else
+        {
+            font = UIFont(name: fontName, size: size+4)!
+        }
+        return font
+    }
+
+
+ func toastLabel(context ctx: UIViewController, msg: String)
+ {
     
     let heightOfLbl: CGFloat = heightForView(text: msg, font: UIFont.systemFont(ofSize: 20), width: ctx.view.frame.size.width - 80)
     let toast = UILabel(frame:
@@ -70,7 +99,8 @@ extension NSObject
         toast.removeFromSuperview()
     })
 }
-func heightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat{
+func heightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat
+{
     let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
     label.numberOfLines = 0
     label.lineBreakMode = NSLineBreakMode.byWordWrapping
