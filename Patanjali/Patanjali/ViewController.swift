@@ -205,7 +205,11 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
     {
         scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * CGFloat(pageController.currentPage), y: 0), animated: true)
     }
-    @IBAction func btnMenuClicked(_ sender: Any) {
+    @IBAction func btnMenuClicked(_ sender: Any)
+    {
+        DispatchQueue.main.async {
+            ProductCategoryController.sharedInstance.openMenu()
+        }
     }
     override func didReceiveMemoryWarning()
     {
