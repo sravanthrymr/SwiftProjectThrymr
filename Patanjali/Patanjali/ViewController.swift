@@ -8,29 +8,34 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIScrollViewDelegate
+class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var pageController: UIPageControl!
     @IBOutlet weak var viewScrollBg: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var imgViewBanner: UIImageView!
+    @IBOutlet weak var tblView: UITableView!
     var arrBanners : NSMutableArray = []
+    var arrLandingProductsData : NSMutableArray = []
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        tblView.rowHeight = 50.0
+        tblView.estimatedRowHeight = UITableViewAutomaticDimension
         
         if(checkNet())
         {
             callServiceForLandingPage()
         }
     }
-
+    
     // MARK: Service call for Landing page
     func callServiceForLandingPage() -> Void
     {
         Services.sharedInstatnce.Service_CallWithData(withParameters: nil, withMethodName: .landingPage) { (response, error, isSuccess) in
             isSuccess ? print("success") : print("fail")
-
+            
             if isSuccess == true
             {
                 let dicResponse = response as! NSDictionary
@@ -49,7 +54,7 @@ class ViewController: UIViewController, UIScrollViewDelegate
             }
         }
     }
-     // MARK: Handle Landingpage Response
+    // MARK: Handle Landingpage Response
     func handleDashBoardResponse(response:NSDictionary) -> Void
     {
         let dicResponseData = response.value(forKey: "data") as! NSDictionary
@@ -67,43 +72,38 @@ class ViewController: UIViewController, UIScrollViewDelegate
         }
         
         let arrProductsList  = dicResponseData.safeObjectForKey(key: "productsList") as? NSArray
-
+        
         for dic : Any in arrProductsList!
         {
-           if dic is NSDictionary
-           {
-            let dicProduct = dic as! NSDictionary
-            
-            let objStruct = structLandingPage()
-            objStruct.intId = dicProduct.safeObjectForKey(key: "id") as? NSInteger
-            objStruct.strTitle = dicProduct.safeObjectForKey(key: "title") as? String
-            objStruct.strCategory = dicProduct.safeObjectForKey(key: "category") as? String
-            objStruct.arrProducts = []
-
-            let arrProductsResponse = dicProduct.value(forKey: "products") as? NSArray
-//            let arrProductsTemp = JsonConverter.sharedInstance
+            if dic is NSDictionary
+            {
+                let dicProduct = dic as! NSDictionary
+                
+                let objStruct = structLandingPage()
+                objStruct.intId = dicProduct.safeObjectForKey(key: "id") as? NSInteger
+                objStruct.strTitle = dicProduct.safeObjectForKey(key: "title") as? String
+                objStruct.strCategory = dicProduct.safeObjectForKey(key: "category") as? String
+                objStruct.arrProducts = []
+                
+                let arrProductsResponse = dicProduct.value(forKey: "products") as? NSArray
+                if arrProductsResponse != nil
+                {
+                    let arrProductsTemp = JsonConverter.sharedInstance.getBannersData(withData: arrProductsResponse!)
+                    objStruct.arrProducts .addObjects(from: arrProductsTemp as! [Any])
+                }
+                if objStruct.arrProducts.count > 0
+                {
+                    arrLandingProductsData .add(objStruct)
+                }
             }
-       }
-        /*
-         
-         for (NSDictionary *dic in arrProductsList)
-         {
-         structLandingPage *objStruct = [[structLandingPage alloc] init];
-         objStruct.intId = [[dic safeObjectForKey:@"id"] integerValue];
-         objStruct.strTitle = [dic safeObjectForKey:@"title"];
-         objStruct.strCategory = [dic safeObjectForKey:@"category"];
-         objStruct.arrProducts = [[NSMutableArray alloc] init];
-         NSArray *arrProductsResponse = [dic safeObjectForKey:@"products"];
-         NSMutableArray *arrProductsDataTemp = [[JsonConverter sharedInstance] getProductsData:arrProductsResponse];
-         [objStruct.arrProducts addObjectsFromArray:arrProductsDataTemp];
-         if(objStruct.arrProducts.count > 0)
-         [arrLandingProductsData addObject:objStruct];
-         }
-*/
-        
+        }
+        print("\(arrLandingProductsData)")
+        DispatchQueue.main.async {
+            self.tblView.reloadData()
+        }
         
     }
-       // MARK: Design Banners View
+    // MARK: Design Banners View
     func designBannerView() -> Void
     {
         DispatchQueue.main.async {
@@ -132,16 +132,39 @@ class ViewController: UIViewController, UIScrollViewDelegate
             self.pageController.numberOfPages = self.arrBanners.count
         }
     }
+    //MARK: UIScrollView Delegates
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
+    {
+        DispatchQueue.main.async
+            {
+                self.pageController.currentPage = Int(scrollView.contentOffset.x/scrollView.frame.size.width)
+        }
+    }
+    //MARK: UITableView Delegates
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return arrLandingProductsData.count
+    }
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        return 180
+    }
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cellIdentifier = "cellHome"
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! HomeTableViewCell
+        return cell
+    }
+    public func numberOfSections(in tableView: UITableView) -> Int
+    {
+        return arrLandingProductsData.count
+    }
+    //MARK: UIButton Actions
     @IBAction func pageControllerClicked(_ sender: Any)
     {
         scrollView.setContentOffset(CGPoint(x: scrollView.frame.size.width * CGFloat(pageController.currentPage), y: 0), animated: true)
     }
-    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView)
-    {
-        DispatchQueue.main.async
-        {
-            self.pageController.currentPage = Int(scrollView.contentOffset.x/scrollView.frame.size.width)
-        }
+    @IBAction func btnMenuClicked(_ sender: Any) {
     }
     override func didReceiveMemoryWarning()
     {

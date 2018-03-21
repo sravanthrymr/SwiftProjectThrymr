@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8618866E2061161E007E4E6E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618866D2061161E007E4E6E /* Reachability.swift */; };
 		861886702061231D007E4E6E /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618866F2061231D007E4E6E /* AsyncImageView.swift */; };
+		E5B6C8B12062580000A87481 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6C8B02062580000A87481 /* HomeTableViewCell.swift */; };
 		E5F78EE62060D49D006DEC28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F78EE52060D49D006DEC28 /* AppDelegate.swift */; };
 		E5F78EE82060D49D006DEC28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F78EE72060D49D006DEC28 /* ViewController.swift */; };
 		E5F78EEB2060D49D006DEC28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5F78EE92060D49D006DEC28 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		8618866D2061161E007E4E6E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		8618866F2061231D007E4E6E /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
+		E5B6C8B02062580000A87481 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		E5F78EE22060D49D006DEC28 /* Patanjali.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Patanjali.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5F78EE52060D49D006DEC28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E5F78EE72060D49D006DEC28 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,9 +51,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E5B6C8AE2062578E00A87481 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				E5B6C8AF206257AD00A87481 /* DashboardTableviewCell */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		E5B6C8AF206257AD00A87481 /* DashboardTableviewCell */ = {
+			isa = PBXGroup;
+			children = (
+				E5B6C8B02062580000A87481 /* HomeTableViewCell.swift */,
+			);
+			path = DashboardTableviewCell;
+			sourceTree = "<group>";
+		};
 		E5F78ED92060D49D006DEC28 = {
 			isa = PBXGroup;
 			children = (
+				E5B6C8AE2062578E00A87481 /* CustomCells */,
 				E5F78F072060EE4E006DEC28 /* Utils */,
 				E5F78EE42060D49D006DEC28 /* Patanjali */,
 				E5F78EE32060D49D006DEC28 /* Products */,
@@ -171,6 +190,7 @@
 				E5F78F092060EECE006DEC28 /* Utils.swift in Sources */,
 				E5F78EE82060D49D006DEC28 /* ViewController.swift in Sources */,
 				861886702061231D007E4E6E /* AsyncImageView.swift in Sources */,
+				E5B6C8B12062580000A87481 /* HomeTableViewCell.swift in Sources */,
 				E5F78F062060E4A4006DEC28 /* JsonConverter.swift in Sources */,
 				8618866E2061161E007E4E6E /* Reachability.swift in Sources */,
 				E5F78EE62060D49D006DEC28 /* AppDelegate.swift in Sources */,

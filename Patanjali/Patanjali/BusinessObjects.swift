@@ -26,8 +26,8 @@ class structPromotionBanners: NSObject
     var strDescription:  String?
     var strDisplayOrder :  String?
     var isActive : Bool? = false
-    var structCategory : structCategories?
-    var structSubCategory: structCategories?
+    var structCategory = structCategories()
+    var structSubCategory = structCategories()
 }
 class structCategories: NSObject
 {
@@ -44,7 +44,7 @@ class structCategories: NSObject
     var strId :  String?
     var strDescription :  String?
     
-    var arrProducts : NSMutableArray?
+    var arrProducts : NSMutableArray = []
     var dataImage : Data?
 }
 class structLandingPage: NSObject
@@ -56,7 +56,7 @@ class structLandingPage: NSObject
     var strTitle :  String?
     var strCategory :  String?
     
-    var arrProducts : NSMutableArray?
+    var arrProducts : NSMutableArray = []
 }
 class structProduct : NSObject
 {
@@ -134,4 +134,14 @@ class structReviewSummery: NSObject
     var fourRatings : Int? = 0
     var fiveRatings : Int? = 0
 }
-
+class structProductImages: NSObject
+{
+    var intId : NSInteger? = 0
+    var intCreatedDate : NSInteger? = 0
+    var intUpdateDate : NSInteger? = 0
+    var isDefault : Bool? = false
+    
+    var strImageUrl :  String?
+    var strImageType :  String?
+    var dataImage :  Data?
+}

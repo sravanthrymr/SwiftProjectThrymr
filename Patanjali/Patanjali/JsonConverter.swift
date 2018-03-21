@@ -59,26 +59,18 @@ class JsonConverter: NSObject
     
     func getProductsData(withData arrData:NSArray) -> NSMutableArray
     {
-        let arrData : NSMutableArray = []
+        let arrProducts : NSMutableArray = []
         for  dic: Any in arrData
         {
             if dic is NSDictionary
             {
-               // let objProduct = dic as! NSDictionary
-
+                let dicProduct = dic as! NSDictionary
+                let objProduct = getProductsDetails(withData: dicProduct)
+                arrProducts .add(objProduct)
             }
         }
-        return arrData
+        return arrProducts
     }
-//    NSMutableArray *arrData = [[NSMutableArray alloc] init];
-//    for (NSDictionary *dicProduct in arrProducts)
-//    {
-//    structProduct *objStruct = [self getProductsDetails:dicProduct];
-//    [arrData addObject:objStruct];
-//    }
-//    return arrData;
-//    }
-    
     func getProductsDetails(withData dicProduct:NSDictionary) -> structProduct
     {
         let objStruct  = structProduct()
@@ -92,100 +84,93 @@ class JsonConverter: NSObject
         objStruct.isCart = dicProduct.safeObjectForKey(key: "hasInCart") as? Bool
         objStruct.intStock = dicProduct.safeObjectForKey(key: "inStock") as? Int
         
+        objStruct.idValue = dicProduct.safeObjectForKey(key: "id") as? NSInteger
+        objStruct.currentDate = dicProduct.safeObjectForKey(key: "currentDate") as? NSInteger
+        objStruct.updateDate = dicProduct.safeObjectForKey(key: "updateDate") as? NSInteger
+
+        objStruct.price = dicProduct.safeObjectForKey(key: "price") as? Float
+        objStruct.discount = dicProduct.safeObjectForKey(key: "discount") as? Float
+        objStruct.quantity = dicProduct.safeObjectForKey(key: "quantity") as? Int
+        objStruct.gstRate = dicProduct.safeObjectForKey(key: "gstRate") as? Float
+
+        objStruct.name = dicProduct.safeObjectForKey(key: "name") as? String
+        objStruct.sku = dicProduct.safeObjectForKey(key: "sku") as? String
+        objStruct.smallDescription = dicProduct.safeObjectForKey(key: "smallDescription") as? String
+        objStruct.longDescription = dicProduct.safeObjectForKey(key: "longDescription") as? String
+        objStruct.weight = dicProduct.safeObjectForKey(key: "weight") as? String
+        objStruct.weightUnit = dicProduct.safeObjectForKey(key: "weightUnit") as? String
+        objStruct.metaTitle = dicProduct.safeObjectForKey(key: "metaTitle") as? String
+        objStruct.metaKeywords = dicProduct.safeObjectForKey(key: "metaKeywords") as? String
+        objStruct.metaDescription = dicProduct.safeObjectForKey(key: "metaDescription") as? String
+        objStruct.sapCode = dicProduct.safeObjectForKey(key: "sapCode") as? String
+        objStruct.hsnClassification = dicProduct.safeObjectForKey(key: "hsnClassification") as? String
+        objStruct.barCode = dicProduct.safeObjectForKey(key: "barCode") as? String
+        objStruct.benefits = dicProduct.safeObjectForKey(key: "benefits") as? String
+        objStruct.ingredients = dicProduct.safeObjectForKey(key: "ingredients") as? String
+        objStruct.howToUse = dicProduct.safeObjectForKey(key: "howToUse") as? String
+        objStruct.shareUrl = dicProduct.safeObjectForKey(key: "shareUrl") as? String
+
+        let arrProductImages  = dicProduct.safeObjectForKey(key: "productImages") as? NSArray
+        if arrProductImages != nil
+        {
+            for dic :Any in arrProductImages!
+            {
+                if dic is NSDictionary
+                {
+                    let dicProductImageTemp = dic as! NSDictionary
+                    let objStructImage = structProductImages()
+                    objStructImage.intId = dicProductImageTemp.safeObjectForKey(key: "id") as? NSInteger
+                    objStructImage.intCreatedDate = dicProductImageTemp.safeObjectForKey(key: "createdDate") as? NSInteger
+                    objStructImage.intUpdateDate = dicProductImageTemp.safeObjectForKey(key: "updateDate") as? NSInteger
+                    objStructImage.strImageUrl = dicProductImageTemp.safeObjectForKey(key:"imageUrl") as? String
+                    objStructImage.strImageUrl = objStructImage.strImageUrl?.replacingOccurrences(of: " ", with: "%20")
+                    objStructImage.strImageType = dicProductImageTemp.safeObjectForKey(key:"imageType") as? String
+                    objStructImage.isDefault = dicProductImageTemp.safeObjectForKey(key: "default") as? Bool
+                    objStruct.arrProductImages .add(objStructImage)
+                }
+            }
+        }
+        let arrProductConfigarations = dicProduct.safeObjectForKey(key: "differentWeightProducts") as? NSArray
+        if arrProductConfigarations != nil
+        {
+            for dicConf :Any in arrProductConfigarations!
+            {
+                if dicConf is NSDictionary
+                {
+                    let dicProductConf = dicConf as! NSDictionary
+                    let objProductInternal = getProductsDetails(withData: dicProductConf)
+                    objStruct.arrProductSizeConfigarations .add(objProductInternal)
+                }
+            }
+        }
+        let dicCategory = dicProduct.safeObjectForKey(key: "category") as? NSDictionary
+        objStruct.structCategory.strId =  dicCategory?.safeObjectForKey(key: "id") as? String
+        objStruct.structCategory.createdDate = dicCategory?.safeObjectForKey(key: "createdDate") as? NSInteger
+        objStruct.structCategory.updateDate = dicCategory?.safeObjectForKey(key: "updateDate") as? NSInteger
+        objStruct.structCategory.strName = dicCategory?.safeObjectForKey(key: "name") as? String
+        objStruct.structCategory.strDescription = dicCategory?.safeObjectForKey(key: "description") as? String
+        objStruct.structCategory.isActive = dicCategory?.safeObjectForKey(key: "active") as? Bool
+        objStruct.structCategory.strFileUrl = dicCategory?.safeObjectForKey(key: "fileUrl") as? String
         
+        let dicSubCategory = dicProduct.safeObjectForKey(key: "subCategory") as? NSDictionary
+        objStruct.structSubCategory.strId =  dicSubCategory?.safeObjectForKey(key: "id") as? String
+        objStruct.structSubCategory.createdDate = dicSubCategory?.safeObjectForKey(key: "createdDate") as? NSInteger
+        objStruct.structSubCategory.updateDate = dicSubCategory?.safeObjectForKey(key: "updateDate") as? NSInteger
+        objStruct.structSubCategory.strName = dicSubCategory?.safeObjectForKey(key: "name") as? String
+        objStruct.structSubCategory.strDescription = dicSubCategory?.safeObjectForKey(key: "description") as? String
+        objStruct.structSubCategory.isActive = dicSubCategory?.safeObjectForKey(key: "active") as? Bool
+        objStruct.structSubCategory.strFileUrl = dicSubCategory?.safeObjectForKey(key: "fileUrl") as? String
         
+        let dicReviewSummary = dicProduct.safeObjectForKey(key: "reviewSummary") as? NSDictionary
+        objStruct.structOveralrating.averageRating = dicReviewSummary?.safeObjectForKey(key: "averageRating") as? Float
+        objStruct.structOveralrating.overallRatings = dicReviewSummary?.safeObjectForKey(key: "overallRatings") as? Int
+        objStruct.structOveralrating.overallReviews = dicReviewSummary?.safeObjectForKey(key: "overallReviews") as? Int
+        objStruct.structOveralrating.oneRatings = dicReviewSummary?.safeObjectForKey(key: "oneRatings") as? Int
+        objStruct.structOveralrating.twoRatings = dicReviewSummary?.safeObjectForKey(key: "twoRatings") as? Int
+        objStruct.structOveralrating.threeRatings = dicReviewSummary?.safeObjectForKey(key: "threeRatings") as? Int
+        objStruct.structOveralrating.fourRatings = dicReviewSummary?.safeObjectForKey(key: "fourRatings") as? Int
+        objStruct.structOveralrating.fiveRatings = dicReviewSummary?.safeObjectForKey(key: "fiveRatings") as? Int
         
         return objStruct
     }
-
-/*
-     -(structProduct *)getProductsDetails:(NSDictionary *)dicProduct
-     {
-     structProduct *objStruct = [[structProduct alloc] init];
-     [objStruct initallocations];
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     objStruct.idValue = [[dicProduct safeObjectForKey:@"id"] integerValue];
-     objStruct.currentDate = [[dicProduct safeObjectForKey:@"currentDate"] integerValue];
-     objStruct.updateDate = [[dicProduct safeObjectForKey:@"updateDate"] integerValue];
-     objStruct.price = [[dicProduct safeObjectForKey:@"price"] floatValue];
-     objStruct.discount = [[dicProduct safeObjectForKey:@"discount"] floatValue];
-     objStruct.quantity = [[dicProduct safeObjectForKey:@"quantity"] intValue];
-     objStruct.gstRate = [[dicProduct safeObjectForKey:@"gstRate"] floatValue];
-     objStruct.name = [dicProduct safeObjectForKey:@"name"];
-     objStruct.sku = [dicProduct safeObjectForKey:@"sku"];
-     objStruct.smallDescription = [dicProduct safeObjectForKey:@"smallDescription"];
-     objStruct.longDescription = [dicProduct safeObjectForKey:@"longDescription"];
-     objStruct.weight = [dicProduct safeObjectForKey:@"weight"];
-     objStruct.weightUnit = [dicProduct safeObjectForKey:@"weightUnit"];
-     objStruct.metaTitle = [dicProduct safeObjectForKey:@"metaTitle"];
-     objStruct.metaKeywords = [dicProduct safeObjectForKey:@"metaKeywords"];
-     objStruct.metaDescription = [dicProduct safeObjectForKey:@"metaDescription"];
-     objStruct.sapCode = [dicProduct safeObjectForKey:@"sapCode"];
-     objStruct.hsnClassification = [dicProduct safeObjectForKey:@"hsnClassification"];
-     objStruct.barCode = [dicProduct safeObjectForKey:@"barCode"];
-     objStruct.benefits = [dicProduct safeObjectForKey:@"benefits"];
-     objStruct.ingredients = [dicProduct safeObjectForKey:@"ingredients"];
-     objStruct.howToUse = [dicProduct safeObjectForKey:@"howToUse"];
-     objStruct.shareUrl = [dicProduct safeObjectForKey:@"shareUrl"];
-     //         objStruct.productManufacture = [dicProduct safeObjectForKey:@"productManufacture"];
-     NSArray *arrProductImages = [dicProduct safeObjectForKey:@"productImages"];
-     for (NSDictionary *dic in arrProductImages)
-     {
-     structProductImages *objStructImage = [[structProductImages alloc]init];
-     objStructImage.intId = [[dic safeObjectForKey:@"id"]  integerValue];
-     objStructImage.intCreatedDate = [[dic safeObjectForKey:@"createdDate"] integerValue];
-     objStructImage.intUpdateDate = [[dic safeObjectForKey:@"updateDate"] integerValue];
-     objStructImage.strImageUrl = [dic safeObjectForKey:@"imageUrl"];
-     objStructImage.strImageUrl = [objStructImage.strImageUrl stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-     objStructImage.strImageType = [dic safeObjectForKey:@"imageType"];
-     objStructImage.isDefault = [[dic safeObjectForKey:@"default"] boolValue];
-     [objStruct.arrProductImages addObject:objStructImage];
-     }
-     
-     NSArray *arrProductConfigarations = [dicProduct safeObjectForKey:@"differentWeightProducts"];
-     for (NSDictionary *dicConf in arrProductConfigarations)
-     {
-     structProduct *objProductInternal = [self getProductsDetails:dicConf];
-     [objStruct.arrProductSizeConfigarations addObject:objProductInternal];;
-     }
-     
-     NSDictionary *dicCategory = [dicProduct safeObjectForKey:@"category"];
-     objStruct.structCategory.strId = [NSString stringWithFormat:@"%ld", [[dicCategory safeObjectForKey:@"id"] integerValue]];
-     objStruct.structCategory.createdDate = [[dicCategory safeObjectForKey:@"createdDate"] integerValue];
-     objStruct.structCategory.updateDate = [[dicCategory safeObjectForKey:@"updateDate"] integerValue];
-     objStruct.structCategory.strName = [dicCategory safeObjectForKey:@"name"];
-     objStruct.structCategory.strDescription = [dicCategory safeObjectForKey:@"description"];
-     objStruct.structCategory.isActive = [[dicCategory safeObjectForKey:@"active"] boolValue];
-     objStruct.structCategory.strFileUrl = [dicCategory safeObjectForKey:@"fileUrl"];
-     
-     NSDictionary *dicSubCategory = [dicProduct safeObjectForKey:@"subCategory"];
-     objStruct.structSubCategory.strId = [NSString stringWithFormat:@"%ld", [[dicSubCategory safeObjectForKey:@"id"] integerValue]];
-     objStruct.structSubCategory.createdDate = [[dicSubCategory safeObjectForKey:@"createdDate"] integerValue];
-     objStruct.structSubCategory.updateDate = [[dicSubCategory safeObjectForKey:@"updateDate"] integerValue];
-     objStruct.structSubCategory.strName = [dicSubCategory safeObjectForKey:@"name"];
-     objStruct.structSubCategory.strDescription = [dicSubCategory safeObjectForKey:@"description"];
-     objStruct.structSubCategory.isActive = [[dicSubCategory safeObjectForKey:@"active"] boolValue];
-     
-     NSDictionary *dicReviewSummary = [dicProduct safeObjectForKey:@"reviewSummary"];
-     objStruct.structOveralrating.averageRating = [[dicReviewSummary safeObjectForKey:@"averageRating"] floatValue];
-     objStruct.structOveralrating.overallRatings = [[dicReviewSummary safeObjectForKey:@"overallRatings"] floatValue];
-     objStruct.structOveralrating.overallReviews = [[dicReviewSummary safeObjectForKey:@"overallReviews"] floatValue];
-     objStruct.structOveralrating.oneRatings = [[dicReviewSummary safeObjectForKey:@"oneRatings"] floatValue];
-     objStruct.structOveralrating.twoRatings = [[dicReviewSummary safeObjectForKey:@"twoRatings"] floatValue];
-     objStruct.structOveralrating.threeRatings = [[dicReviewSummary safeObjectForKey:@"threeRatings"] floatValue];
-     objStruct.structOveralrating.fourRatings = [[dicReviewSummary safeObjectForKey:@"fourRatings"] floatValue];
-     objStruct.structOveralrating.fiveRatings = [[dicReviewSummary safeObjectForKey:@"fiveRatings"] floatValue];
-     
-     return objStruct;
-     }
-*/
 }
