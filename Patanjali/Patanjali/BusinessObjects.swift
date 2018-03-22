@@ -145,3 +145,12 @@ class structProductImages: NSObject
     var strImageType :  String?
     var dataImage :  Data?
 }
+class structDescription: NSObject
+{
+    var isLine : Bool? = false
+    
+    var strTitle :  String?
+    var strDescription :  String?
+    var strImageName :  String?
+    var screenType :  String?
+}
