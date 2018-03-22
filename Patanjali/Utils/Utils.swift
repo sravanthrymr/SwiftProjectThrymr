@@ -130,7 +130,6 @@ func heightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat
  }
  }
  */
-
 func setAttrStrForProductUnits(str1: String, str2: String ) -> NSAttributedString
 {
     let str1Attributes: [NSAttributedStringKey : Any] = [
@@ -147,5 +146,16 @@ func setAttrStrForProductUnits(str1: String, str2: String ) -> NSAttributedStrin
     
     return attString
 }
-
+func shadowEffect(bgView: Any, cornerRadius: CGFloat)
+{
+    let view = bgView as! UIView
+    view.layer.cornerRadius = cornerRadius
+    view.layer.shadowColor = COLORTEXT_GRAY.cgColor
+    view.layer.shadowOpacity = 5
+    view.layer.shadowOffset = CGSize.zero
+    view.layer.shadowRadius = 1
+    view.layer.masksToBounds = true
+//    view.layer.shadowPath = UIBezierPath(rect: view.bounds).cgPath
+//    view.layer.shouldRasterize = true
+}
 

@@ -22,6 +22,8 @@ class ProductCollectionViewCell: UICollectionViewCell
     {
         super.awakeFromNib()
         
+        shadowEffect(bgView: cellBGView, cornerRadius: 4.0)
+        
         lblNoData.layer.borderColor = COLORTEXT_GRAY.cgColor;
         
         lblNoData.font = setRandomFont(withSize: 13.0, withFontName: FONTOPENSANS_REGULAR)

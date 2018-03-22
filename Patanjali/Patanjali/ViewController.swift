@@ -21,8 +21,9 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
     {
         super.viewDidLoad()
         
-        tblView.rowHeight = 50.0
-        tblView.estimatedRowHeight = UITableViewAutomaticDimension
+       
+        tblView.estimatedRowHeight = 200.0
+        tblView.rowHeight = UITableViewAutomaticDimension
         
         if(checkNet())
         {
@@ -161,7 +162,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
         viewHeader .addSubview(lblTitle)
         
         let buttonSeeAll = UIButton.init(type: .custom)
-        buttonSeeAll.frame = CGRect(x: tblView.frame.size.width - 70, y: 5, width: 60, height: 40)
+        buttonSeeAll.frame = CGRect(x: tblView.frame.size.width - 100, y: 5, width: 100, height: 40)
         buttonSeeAll .setTitle("See All", for: .normal)
         buttonSeeAll.setTitleColor(UIColor.gray, for: .normal)
        buttonSeeAll .titleLabel?.font = setRandomFont(withSize: 15.0, withFontName: FONTOPENSANS_BOLD)
@@ -176,7 +177,7 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
     }
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return 180
+        return 200.0
     }
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {

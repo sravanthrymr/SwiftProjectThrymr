@@ -8,7 +8,7 @@
 
 import UIKit
 var arrProducts : NSMutableArray = []
-class HomeTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource
+class HomeTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     @IBOutlet weak var collectionViewProducts: UICollectionView!
     override func awakeFromNib()
@@ -45,11 +45,11 @@ class HomeTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollection
 
     return cell
    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return CGSize(width:400, height: CGFloat(300))
+        return CGSize(width:180, height: CGFloat(200))
     }
+    
     override func setSelected(_ selected: Bool, animated: Bool)
     {
         super.setSelected(selected, animated: animated)
