@@ -44,8 +44,6 @@ class Services: NSObject
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue(X_API_KEY, forHTTPHeaderField: "X-API-KEY")
-//        [request setHTTPMethod:@"GET"];
-      //  [request addValue:UserDefaults_getobject(AUTHENTICATION_KEY) forHTTPHeaderField:@"Authorization"];
 
         switch methodName
         {

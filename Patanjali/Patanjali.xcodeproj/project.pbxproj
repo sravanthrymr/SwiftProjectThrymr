@@ -10,6 +10,8 @@
 		8618866E2061161E007E4E6E /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618866D2061161E007E4E6E /* Reachability.swift */; };
 		861886702061231D007E4E6E /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8618866F2061231D007E4E6E /* AsyncImageView.swift */; };
 		86B9394420627A010059E23D /* ProductCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B9394320627A010059E23D /* ProductCategoryController.swift */; };
+		E54418272063A3F3005E7512 /* LeftMenuHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E54418262063A3F3005E7512 /* LeftMenuHeaderTableViewCell.xib */; };
+		E54418292063A41C005E7512 /* LeftMenuHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54418282063A41C005E7512 /* LeftMenuHeaderTableViewCell.swift */; };
 		E5B6C8B12062580000A87481 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6C8B02062580000A87481 /* HomeTableViewCell.swift */; };
 		E5B6C8B3206261AC00A87481 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6C8B2206261AC00A87481 /* Defaults.swift */; };
 		E5B6C8DF206266B000A87481 /* TermsandConditions.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B6C8B7206266B000A87481 /* TermsandConditions.strings */; };
@@ -68,6 +70,8 @@
 		8618866D2061161E007E4E6E /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		8618866F2061231D007E4E6E /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		86B9394320627A010059E23D /* ProductCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryController.swift; sourceTree = "<group>"; };
+		E54418262063A3F3005E7512 /* LeftMenuHeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		E54418282063A41C005E7512 /* LeftMenuHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		E5B6C8B02062580000A87481 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		E5B6C8B2206261AC00A87481 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		E5B6C8B7206266B000A87481 /* TermsandConditions.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = TermsandConditions.strings; sourceTree = "<group>"; };
@@ -135,9 +139,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E54418252063A3F3005E7512 /* LeftMenuHeaderTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				E54418262063A3F3005E7512 /* LeftMenuHeaderTableViewCell.xib */,
+				E54418282063A41C005E7512 /* LeftMenuHeaderTableViewCell.swift */,
+			);
+			path = LeftMenuHeaderTableViewCell;
+			sourceTree = "<group>";
+		};
 		E5B6C8AE2062578E00A87481 /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
+				E54418252063A3F3005E7512 /* LeftMenuHeaderTableViewCell */,
 				E5B6C9072062856500A87481 /* ProductCollectionViewCell */,
 				E5B6C8AF206257AD00A87481 /* DashboardTableviewCell */,
 			);
@@ -365,6 +379,7 @@
 				E5B6C8EF206266B000A87481 /* OpenSans-Italic.ttf in Resources */,
 				E5B6C8E1206266B000A87481 /* PrivacyPolicy.strings in Resources */,
 				E5B6C903206266B000A87481 /* Roboto-Black.ttf in Resources */,
+				E54418272063A3F3005E7512 /* LeftMenuHeaderTableViewCell.xib in Resources */,
 				E5B6C8FD206266B000A87481 /* Roboto-Italic.ttf in Resources */,
 				E5B6C8F8206266B000A87481 /* OpenSans-Bold.ttf in Resources */,
 				E5B6C8DF206266B000A87481 /* TermsandConditions.strings in Resources */,
@@ -391,6 +406,7 @@
 			files = (
 				E5F78F042060E445006DEC28 /* Services.swift in Sources */,
 				86B9394420627A010059E23D /* ProductCategoryController.swift in Sources */,
+				E54418292063A41C005E7512 /* LeftMenuHeaderTableViewCell.swift in Sources */,
 				E5F78F002060E189006DEC28 /* ServicesUtils.swift in Sources */,
 				E5F78F022060E3A5006DEC28 /* BusinessObjects.swift in Sources */,
 				E5F78F092060EECE006DEC28 /* Utils.swift in Sources */,

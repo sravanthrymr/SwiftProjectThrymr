@@ -8,7 +8,15 @@
 
 import UIKit
 
-class ProductCategoryController: UIViewController {
+let ViewcornerRadius = 8.0
+let ViewShadowOffSet = CGSize(width: -15, height: 20)
+let ViewShadowRadius = 5.0
+let ViewShadowOpacity = 0.5
+let ViewWidth = 0.8
+let TableViewCellHeight = 40.0
+
+class ProductCategoryController: UIViewController, UITableViewDataSource, UITableViewDelegate
+{
     
     @IBOutlet weak var imgViewHome: UIImageView!
     @IBOutlet weak var bgView: UIView!
@@ -46,8 +54,25 @@ class ProductCategoryController: UIViewController {
         tableView.estimatedSectionHeaderHeight = 50.0
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
 
-//        tableView.delegate = self as! UITableViewDelegate
-//        tableView.dataSource = self as! UITableViewDataSource
+        self.view.frame = self.view.bounds;
+        self.view.backgroundColor = UIColor.clear
+        self.view.layer.masksToBounds = false;
+        self.view.layer.cornerRadius = CGFloat(ViewcornerRadius)
+        self.view.layer.shadowOffset = ViewShadowOffSet
+        self.view.layer.shadowRadius = CGFloat(ViewShadowRadius)
+        self.view.layer.shadowOpacity = Float(ViewShadowOpacity)
+
+        var  menuFrame : CGRect = self.view.bounds
+        menuFrame.size.width =  menuFrame.size.width * CGFloat(ViewWidth)
+
+        bgView.frame = menuFrame
+        bgView.transform = CGAffineTransform(scaleX: -bgView.bounds.size.width, y: CGFloat(0))
+        placeHolderView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        
+        tableView .register(UINib(nibName: "LeftMenuHeaderTableViewCell", bundle: Bundle.main), forCellReuseIdentifier: "LeftMenuHeaderTableViewCell")
+
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.separatorStyle = .none;
     }
     func setMenuOptions()
@@ -111,14 +136,6 @@ class ProductCategoryController: UIViewController {
             self.tableView .reloadData()
         }
     }
-    @objc func handleSingleTap(rocognizer: UITapGestureRecognizer) -> Void
-    {
-        closeMenu()
-    }
-    @objc func closeSlideMenu(rocognizer: UISwipeGestureRecognizer) -> Void
-    {
-        closeMenu()
-    }
     // MARK : To open side menu
     func openMenu()
     {
@@ -169,11 +186,73 @@ class ProductCategoryController: UIViewController {
     {
         closeMenu()
     }
-    
+    @objc func handleSingleTap(rocognizer: UITapGestureRecognizer) -> Void
+    {
+        closeMenu()
+    }
+    @objc func closeSlideMenu(rocognizer: UISwipeGestureRecognizer) -> Void
+    {
+        closeMenu()
+    }
+    //MARK: UITableView Delegate
+    public func numberOfSections(in tableView: UITableView) -> Int
+    {
+        return arrData.count + Int((UserDefaults.standard.object(forKey: IS_LOGIN) as? String == "YES") ? arrPostLogin.count : arrPreLogin.count)
+    }
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        if(section > arrData.count-1)
+        {
+            return 0
+        }
+        if(arrData.count > 0)
+        {
+            let  objStruct = arrData[section] as! structCategories
+            return objStruct.arrProducts.count
+        }
+        else
+        {
+            return 0
+        }
+    }
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
+    {
+        let objStruct = arrData[indexPath.section] as! structCategories
+        return (objStruct.isSelected == true) ? UITableViewAutomaticDimension : 0.0
+    }
+
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    {
+        return UITableViewAutomaticDimension
+    }
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?
+    {
+        var viewHeader = tableView.dequeueReusableCell(withIdentifier: "LeftMenuHeaderTableViewCell") as? LeftMenuHeaderTableViewCell
+        if(viewHeader == nil)
+        {
+            viewHeader = UITableViewCell.init(style: .default, reuseIdentifier: "LeftMenuHeaderTableViewCell") as? LeftMenuHeaderTableViewCell
+        }
+        return viewHeader
+    }
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cellIdentifier = "cellProductCategory"
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)!
+        
+        let objCategory = arrData[indexPath.section] as! structCategories
+        let objProduct = objCategory.arrProducts[indexPath.row] as! structCategories
+
+        cell.contentView.backgroundColor = (objProduct.isSelected == true) ?  UIColor.init(red: 230/255.0, green: 230/255.0, blue: 230/255.0, alpha: 1.0) :  UIColor.init(red: 150/255.0, green: 150/255.0, blue: 150/255.0, alpha: 1.0)
+        
+        cell.textLabel?.text = objProduct.strName
+        cell.textLabel?.font = setRandomFont(withSize: 10, withFontName: FONTOPENSANS_REGULAR)
+        cell.textLabel?.textColor = UIColor.init(red: 150/255.0, green: 150/255.0, blue: 150/255.0, alpha: 1.0)
+        return cell
+    }
+
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 }
