@@ -155,7 +155,7 @@ func shadowEffect(bgView: Any, cornerRadius: CGFloat)
     view.layer.shadowOffset = CGSize.zero
     view.layer.shadowRadius = 1
     view.layer.masksToBounds = true
-//    view.layer.shadowPath = UIBezierPath(rect: view.bounds).cgPath
-//    view.layer.shouldRasterize = true
+    //    view.layer.shadowPath = UIBezierPath(rect: view.bounds).cgPath
+    //    view.layer.shouldRasterize = true
 }
 
