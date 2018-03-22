@@ -43,39 +43,39 @@ extension NSObject
         }
     }
 }
-    func setRandomFont(withSize size : CGFloat, withFontName fontName: String) -> UIFont
+func setRandomFont(withSize size : CGFloat, withFontName fontName: String) -> UIFont
+{
+    var font : UIFont!
+    if SCREEN_HEIGHT ==  CGFloat(IPHONE_4_SCREEN_HEIGHT)
     {
-        var font : UIFont!
-        if SCREEN_HEIGHT ==  CGFloat(IPHONE_4_SCREEN_HEIGHT)
-        {
-            font = UIFont(name: fontName, size: size)!
-        }
-        else if (SCREEN_HEIGHT == CGFloat(IPHONE_5_SCREEN_HEIGHT)) // iPhone 5,5S, SE
-        {
-             font = UIFont(name: fontName, size: size+1)!
-        }
-        else if (SCREEN_WIDTH == CGFloat(IPHONE_6_SCREEN_WIDTH)) // iPhone 6, 6S, 7
-        {
-             font = UIFont(name: fontName, size: size+2)!
-        }
-        else if (SCREEN_WIDTH == CGFloat(IPHONE_6PLUS_SCREEN_WIDTH)) // iPhone 6 Plus, 6s Plus, 7 Plus
-        {
-             font = UIFont(name: fontName, size: size+4)!
-        }
-        else if (SCREEN_WIDTH == CGFloat(768)) // iPad
-        {
-             font = UIFont(name: fontName, size: size+5)!
-        }
-        else
-        {
-            font = UIFont(name: fontName, size: size+4)!
-        }
-        return font
+        font = UIFont(name: fontName, size: size)!
     }
+    else if (SCREEN_HEIGHT == CGFloat(IPHONE_5_SCREEN_HEIGHT)) // iPhone 5,5S, SE
+    {
+        font = UIFont(name: fontName, size: size+1)!
+    }
+    else if (SCREEN_WIDTH == CGFloat(IPHONE_6_SCREEN_WIDTH)) // iPhone 6, 6S, 7
+    {
+        font = UIFont(name: fontName, size: size+2)!
+    }
+    else if (SCREEN_WIDTH == CGFloat(IPHONE_6PLUS_SCREEN_WIDTH)) // iPhone 6 Plus, 6s Plus, 7 Plus
+    {
+        font = UIFont(name: fontName, size: size+4)!
+    }
+    else if (SCREEN_WIDTH == CGFloat(768)) // iPad
+    {
+        font = UIFont(name: fontName, size: size+5)!
+    }
+    else
+    {
+        font = UIFont(name: fontName, size: size+4)!
+    }
+    return font
+}
 
 
- func toastLabel(context ctx: UIViewController, msg: String)
- {
+func toastLabel(context ctx: UIViewController, msg: String)
+{
     
     let heightOfLbl: CGFloat = heightForView(text: msg, font: UIFont.systemFont(ofSize: 20), width: ctx.view.frame.size.width - 80)
     let toast = UILabel(frame:
@@ -112,23 +112,40 @@ func heightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat
 }
 /*
  extension UILabel
+ {
+ var optimalHeight : CGFloat
+ {
+ get
+ {
+ let label = UILabel(frame:CGRect(x:0, y: 0, width: self.frame.width, height: CGFloat.greatestFiniteMagnitude))
+ label.numberOfLines = 0
+ label.lineBreakMode = self.lineBreakMode
+ label.font = self.font
+ label.text = self.text
+ 
+ label.sizeToFit()
+ 
+ return label.frame.height
+ }
+ }
+ }
+ */
+
+func setAttrStrForProductUnits(str1: String, str2: String ) -> NSAttributedString
 {
-    var optimalHeight : CGFloat
-    {
-        get
-        {
-            let label = UILabel(frame:CGRect(x:0, y: 0, width: self.frame.width, height: CGFloat.greatestFiniteMagnitude))
-            label.numberOfLines = 0
-            label.lineBreakMode = self.lineBreakMode
-            label.font = self.font
-            label.text = self.text
-
-            label.sizeToFit()
-
-            return label.frame.height
-        }
-    }
+    let str1Attributes: [NSAttributedStringKey : Any] = [
+        NSAttributedStringKey.font: setRandomFont(withSize: 13.0, withFontName: FONTOPENSANS_REGULAR),
+        NSAttributedStringKey.foregroundColor: UIColor.black]
+    
+    let str2Attributes: [NSAttributedStringKey : Any] = [
+        NSAttributedStringKey.font: setRandomFont(withSize: 9.0, withFontName: FONTOPENSANS_REGULAR),
+        NSAttributedStringKey.foregroundColor: COLORTEXT_GRAY]
+    
+    let attString = NSMutableAttributedString()
+    attString.append(NSAttributedString(string:str1, attributes: str1Attributes))
+    attString.append(NSAttributedString(string:str2, attributes: str2Attributes))
+    
+    return attString
 }
-*/
 
 
