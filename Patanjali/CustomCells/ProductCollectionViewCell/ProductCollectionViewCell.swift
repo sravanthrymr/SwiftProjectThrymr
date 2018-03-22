@@ -9,7 +9,6 @@
 import UIKit
 class ProductCollectionViewCell: UICollectionViewCell
 {
-    
     @IBOutlet weak var lblNoData: UILabel!
     @IBOutlet weak var cellBGView: UIView!
     @IBOutlet weak var imgProduct: UIImageView!
@@ -22,17 +21,19 @@ class ProductCollectionViewCell: UICollectionViewCell
     {
         super.awakeFromNib()
         
+        shadowEffect(bgView: cellBGView, cornerRadius: 4.0)
+        
         lblNoData.layer.borderColor = COLORTEXT_GRAY.cgColor;
         
         lblNoData.font = setRandomFont(withSize: 13.0, withFontName: FONTOPENSANS_REGULAR)
         lblNoData.layer.borderWidth = 1.0
         lblNoData.layer.cornerRadius = 5.0
-
+        
         lblProductName.font = setRandomFont(withSize: 10.0, withFontName: FONTOPENSANS_REGULAR)
         lblProductQty.font = setRandomFont(withSize: 10.0, withFontName: FONTOPENSANS_REGULAR)
         lblProductCost.font = setRandomFont(withSize: 10.0, withFontName: FONTOPENSANS_REGULAR)
     }
-
+    
     @IBAction func btnActionProductRating(_ sender: Any)
     {
     }

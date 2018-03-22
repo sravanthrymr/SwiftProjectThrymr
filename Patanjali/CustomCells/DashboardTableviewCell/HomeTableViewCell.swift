@@ -8,13 +8,13 @@
 
 import UIKit
 var arrProducts : NSMutableArray = []
-class HomeTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource
+class HomeTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     @IBOutlet weak var collectionViewProducts: UICollectionView!
     override func awakeFromNib()
     {
         super.awakeFromNib()
-
+        
         collectionViewProducts.delegate = self
         collectionViewProducts.dataSource = self
         collectionViewProducts.register(UINib(nibName: "ProductCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "ProductCollectionViewCell")
@@ -30,31 +30,30 @@ class HomeTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollection
     {
         return arrProducts.count
     }
-   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
-   {
-    let cellIdentifier = "ProductCollectionViewCell"
-    let cell = collectionViewProducts.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! ProductCollectionViewCell
-    
-    let objStructProduct = arrProducts[indexPath.item] as! structProduct
-    
-    cell.lblProductQty.attributedText = setAttrStrForProductUnits(str1:objStructProduct.weight!, str2:String(format:" %@", objStructProduct.weightUnit!))
-    cell.lblProductName.text = objStructProduct.name
- 
-    cell.lblProductCost.text = String(format: "\u{20b9} %.2f", objStructProduct.price!)
-    cell.imgProduct.image = UIImage(named: "previewBackground")
-
-    return cell
-   }
-    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        let cellIdentifier = "ProductCollectionViewCell"
+        let cell = collectionViewProducts.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! ProductCollectionViewCell
+        
+        let objStructProduct = arrProducts[indexPath.item] as! structProduct
+        
+        cell.lblProductQty.attributedText = setAttrStrForProductUnits(str1:objStructProduct.weight!, str2:String(format:" %@", objStructProduct.weightUnit!))
+        cell.lblProductName.text = objStructProduct.name
+        
+        cell.lblProductCost.text = String(format: "\u{20b9} %.2f", objStructProduct.price!)
+        cell.imgProduct.image = UIImage(named: "previewBackground")
+        
+        return cell
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        return CGSize(width:400, height: CGFloat(300))
+        return CGSize(width:180, height: CGFloat(200))
     }
+    
     override func setSelected(_ selected: Bool, animated: Bool)
     {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
-
+    
 }
