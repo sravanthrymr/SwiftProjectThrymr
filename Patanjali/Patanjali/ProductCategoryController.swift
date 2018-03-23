@@ -74,6 +74,7 @@ class ProductCategoryController: UIViewController, UITableViewDataSource, UITabl
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none;
+        setMenuOptions()
     }
     func setMenuOptions()
     {
@@ -194,6 +195,10 @@ class ProductCategoryController: UIViewController, UITableViewDataSource, UITabl
     {
         closeMenu()
     }
+    @objc func btnSectionExpandClicked(button : UIButton)
+    {
+        
+    }
     //MARK: UITableView Delegate
     public func numberOfSections(in tableView: UITableView) -> Int
     {
@@ -220,7 +225,6 @@ class ProductCategoryController: UIViewController, UITableViewDataSource, UITabl
         let objStruct = arrData[indexPath.section] as! structCategories
         return (objStruct.isSelected == true) ? UITableViewAutomaticDimension : 0.0
     }
-
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
         return UITableViewAutomaticDimension
@@ -232,6 +236,78 @@ class ProductCategoryController: UIViewController, UITableViewDataSource, UITabl
         {
             viewHeader = UITableViewCell.init(style: .default, reuseIdentifier: "LeftMenuHeaderTableViewCell") as? LeftMenuHeaderTableViewCell
         }
+        viewHeader?.btnExpand .addTarget(self, action: #selector(btnSectionExpandClicked), for: .touchUpInside)
+        viewHeader?.btnExpand.tag = section
+        
+        if(section <= arrData.count-1 && arrData.count > 0)
+        {
+            let objStruct = arrData[section] as! structCategories
+            viewHeader?.lblCategoryname.text = objStruct.strName
+            viewHeader?.imageViewLogo.image = UIImage.init(named: "listIconPreview")
+            if(objStruct.isSelected == true)
+            {
+                viewHeader?.lblCategoryname.textColor = COLOR_SELECTED_ORANGE;
+                viewHeader?.lblCategoryname.font = setRandomFont(withSize: 13.0, withFontName: FONTOPENSANS_BOLD)
+                viewHeader?.imageViewExpand.image = UIImage.init(named: "minus")
+            }
+            else
+            {
+                viewHeader?.lblCategoryname.textColor = COLORTEXT_SELECTED_GRAY;
+                viewHeader?.imageViewExpand.image = UIImage.init(named: "plus")
+                viewHeader?.lblCategoryname.font = setRandomFont(withSize: 12.0, withFontName: FONTOPENSANS_BOLD)
+            }
+            if(objStruct.strIconUrl != nil)
+            {
+                if(objStruct.dataImage != nil)
+                {
+                    viewHeader?.imageViewLogo.image = UIImage.init(data: objStruct.dataImage!)
+                }
+                else
+                {
+                    DispatchQueue.global(qos: .default).async(execute: {() -> Void in
+                        let dataOfImage = try? Data.init(contentsOf: URL.init(string: objStruct.strIconUrl!)!)
+                        if(dataOfImage != nil)
+                        {
+                            objStruct.dataImage = dataOfImage
+                            let imageDownloaded = UIImage.init(data: objStruct.dataImage!)
+                            DispatchQueue.main.async {
+                                viewHeader?.imageViewLogo.image = imageDownloaded
+                            }
+                        }
+                    })
+                }
+            }
+                viewHeader?.imageViewExpand.isHidden = false
+                viewHeader?.imageViewLine.isHidden = true
+              
+                if(arrData.count-1 == section)
+                {
+                    viewHeader?.lblCategoryname.textColor = COLORBACKGROUND_GRAY;
+                    viewHeader?.lblCategoryname.font = setRandomFont(withSize: 12.0, withFontName: FONTOPENSANS_BOLD)
+                    viewHeader?.imageViewExpand.backgroundColor = COLORTEXT_GRAY;
+                    viewHeader?.imageViewExpand.isHidden = true
+                    viewHeader?.imageViewLogo.image = UIImage.init(named: "healthIcon")
+                    viewHeader?.imageViewLine.isHidden = true
+                }
+        }
+        else
+        {
+            viewHeader?.imageViewLine.backgroundColor = COLORTEXT_GRAY;
+            viewHeader?.imageViewLine.contentMode = .scaleAspectFit
+            viewHeader?.imageViewExpand.isHidden = true
+            
+            let objProduct = ((UserDefaults.standard.object(forKey: IS_LOGIN) as? String == "YES") ? arrPostLogin[section-arrData.count] : arrPreLogin[section-arrData.count]) as! structDescription
+            
+            viewHeader?.imageViewLine.isHidden = (objProduct.isLine == true) ? false : true
+            viewHeader?.lblCategoryname.text = objProduct.strTitle;
+            if (objProduct.strImageName != nil)
+            {
+                viewHeader?.imageViewLogo.image = UIImage.init(named: objProduct.strImageName!)
+            }
+            viewHeader?.lblCategoryname.textColor = UIColor.init(red: 150/255.0, green: 150/255.0, blue: 150/255.0, alpha: 1.0)
+            viewHeader?.lblCategoryname.font = setRandomFont(withSize: 11.0, withFontName: FONTOPENSANS_REGULAR)
+        }
+
         return viewHeader
     }
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
