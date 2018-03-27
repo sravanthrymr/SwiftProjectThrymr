@@ -31,7 +31,9 @@ class Services: NSObject
         case .login:
             url = "login"
         case .landingPage:
-            url = "c/landing-page-response";
+            url = "c/landing-page-response"
+        case .categoryList:
+            url = "c/categories"
         default:
             url = "NoValue"
         }
@@ -44,12 +46,21 @@ class Services: NSObject
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue(X_API_KEY, forHTTPHeaderField: "X-API-KEY")
-
+      
+        if let strLogin = UserDefaults.standard.object(forKey: IS_LOGIN) as? String
+        {
+            if(strLogin == "YES")
+            {
+                request.addValue(UserDefaults.standard.object(forKey: "AUTHENTICATION_KEY") as! String, forHTTPHeaderField: "Authorization")
+            }
+        }
         switch methodName
         {
         case .login:
             request.httpMethod = "POST"
         case .landingPage:
+            request.httpMethod = "GET"
+        case .categoryList:
             request.httpMethod = "GET"
         default:
             request.httpMethod = "POST"

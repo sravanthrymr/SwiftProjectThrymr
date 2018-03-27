@@ -181,11 +181,11 @@ class ViewController: UIViewController, UIScrollViewDelegate, UITableViewDataSou
     }
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cellIdentifier = "cellHome"
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! HomeTableViewCell
-        
-        let objStruct = arrLandingProductsData[indexPath.section] as! structLandingPage
-        cell.setData(withProducts: objStruct.arrProducts as! [structProduct])
+        let cellIdentifier = "HomeTableViewCell"
+        let cell = tblView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! HomeTableViewCell
+//        let objStruct = arrLandingProductsData[indexPath.section] as! structLandingPage
+        cell.collectionViewProducts.tag = indexPath.section
+        cell.setData(withProducts: arrLandingProductsData)
         return cell
     }
     public func numberOfSections(in tableView: UITableView) -> Int

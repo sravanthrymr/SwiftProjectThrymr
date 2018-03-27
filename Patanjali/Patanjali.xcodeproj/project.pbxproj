@@ -12,6 +12,8 @@
 		86B9394420627A010059E23D /* ProductCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B9394320627A010059E23D /* ProductCategoryController.swift */; };
 		E54418272063A3F3005E7512 /* LeftMenuHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E54418262063A3F3005E7512 /* LeftMenuHeaderTableViewCell.xib */; };
 		E54418292063A41C005E7512 /* LeftMenuHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E54418282063A41C005E7512 /* LeftMenuHeaderTableViewCell.swift */; };
+		E59BB3402064F5FD00149016 /* ProductCategoryCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59BB33F2064F5FD00149016 /* ProductCategoryCustomView.swift */; };
+		E59BB3422064F60A00149016 /* ProductCategoryCustomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E59BB3412064F60A00149016 /* ProductCategoryCustomView.xib */; };
 		E5B6C8B12062580000A87481 /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6C8B02062580000A87481 /* HomeTableViewCell.swift */; };
 		E5B6C8B3206261AC00A87481 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B6C8B2206261AC00A87481 /* Defaults.swift */; };
 		E5B6C8DF206266B000A87481 /* TermsandConditions.strings in Resources */ = {isa = PBXBuildFile; fileRef = E5B6C8B7206266B000A87481 /* TermsandConditions.strings */; };
@@ -72,6 +74,8 @@
 		86B9394320627A010059E23D /* ProductCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryController.swift; sourceTree = "<group>"; };
 		E54418262063A3F3005E7512 /* LeftMenuHeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		E54418282063A41C005E7512 /* LeftMenuHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		E59BB33F2064F5FD00149016 /* ProductCategoryCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCategoryCustomView.swift; sourceTree = "<group>"; };
+		E59BB3412064F60A00149016 /* ProductCategoryCustomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCategoryCustomView.xib; sourceTree = "<group>"; };
 		E5B6C8B02062580000A87481 /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		E5B6C8B2206261AC00A87481 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		E5B6C8B7206266B000A87481 /* TermsandConditions.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = TermsandConditions.strings; sourceTree = "<group>"; };
@@ -148,9 +152,19 @@
 			path = LeftMenuHeaderTableViewCell;
 			sourceTree = "<group>";
 		};
+		E59BB33E2064F5DB00149016 /* ProductCategoryCustomView */ = {
+			isa = PBXGroup;
+			children = (
+				E59BB33F2064F5FD00149016 /* ProductCategoryCustomView.swift */,
+				E59BB3412064F60A00149016 /* ProductCategoryCustomView.xib */,
+			);
+			path = ProductCategoryCustomView;
+			sourceTree = "<group>";
+		};
 		E5B6C8AE2062578E00A87481 /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
+				E59BB33E2064F5DB00149016 /* ProductCategoryCustomView */,
 				E54418252063A3F3005E7512 /* LeftMenuHeaderTableViewCell */,
 				E5B6C9072062856500A87481 /* ProductCollectionViewCell */,
 				E5B6C8AF206257AD00A87481 /* DashboardTableviewCell */,
@@ -370,6 +384,7 @@
 				E5F78EED2060D49D006DEC28 /* Assets.xcassets in Resources */,
 				E5B6C8F3206266B000A87481 /* OpenSans-ExtraBold.ttf in Resources */,
 				E5B6C8F1206266B000A87481 /* RobotoSlab-Bold.ttf in Resources */,
+				E59BB3422064F60A00149016 /* ProductCategoryCustomView.xib in Resources */,
 				E5B6C8FE206266B000A87481 /* Roboto-BlackItalic.ttf in Resources */,
 				E5B6C8E7206266B000A87481 /* RobotoCondensed-Bold.ttf in Resources */,
 				E5B6C901206266B000A87481 /* Roboto-Bold.ttf in Resources */,
@@ -410,6 +425,7 @@
 				E5F78F002060E189006DEC28 /* ServicesUtils.swift in Sources */,
 				E5F78F022060E3A5006DEC28 /* BusinessObjects.swift in Sources */,
 				E5F78F092060EECE006DEC28 /* Utils.swift in Sources */,
+				E59BB3402064F5FD00149016 /* ProductCategoryCustomView.swift in Sources */,
 				E5F78EE82060D49D006DEC28 /* ViewController.swift in Sources */,
 				861886702061231D007E4E6E /* AsyncImageView.swift in Sources */,
 				E5B6C8B12062580000A87481 /* HomeTableViewCell.swift in Sources */,

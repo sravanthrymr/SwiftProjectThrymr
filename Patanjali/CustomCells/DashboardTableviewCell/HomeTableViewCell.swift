@@ -7,7 +7,7 @@
 //
 
 import UIKit
-var arrProducts : NSMutableArray = []
+var arrProducts : NSMutableArray?
 class HomeTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 {
     @IBOutlet weak var collectionViewProducts: UICollectionView!
@@ -19,23 +19,30 @@ class HomeTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollection
         collectionViewProducts.dataSource = self
         collectionViewProducts.register(UINib(nibName: "ProductCollectionViewCell", bundle: Bundle.main), forCellWithReuseIdentifier: "ProductCollectionViewCell")
     }
-    
-    func setData(withProducts arrData : [ structProduct ]) -> Void
+    func setData(withProducts arrData : NSMutableArray) -> Void
     {
-        arrProducts .removeAllObjects()
-        arrProducts .addObjects(from: arrData)
-        collectionViewProducts.reloadData()
+        arrProducts  = arrData
+        self.collectionViewProducts.reloadData()
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return arrProducts.count
+        if arrProducts != nil
+        {
+            let objStruct = arrProducts![collectionViewProducts.tag] as! structLandingPage
+           return objStruct.arrProducts.count
+        }
+        else
+        {
+            return 0
+        }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         let cellIdentifier = "ProductCollectionViewCell"
         let cell = collectionViewProducts.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! ProductCollectionViewCell
         
-        let objStructProduct = arrProducts[indexPath.item] as! structProduct
+        let objStruct = arrProducts![collectionViewProducts.tag] as! structLandingPage
+        let objStructProduct = objStruct.arrProducts[indexPath.item] as! structProduct
         
         cell.lblProductQty.attributedText = setAttrStrForProductUnits(str1:objStructProduct.weight!, str2:String(format:" %@", objStructProduct.weightUnit!))
         cell.lblProductName.text = objStructProduct.name
@@ -49,11 +56,9 @@ class HomeTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollection
     {
         return CGSize(width:180, height: CGFloat(200))
     }
-    
     override func setSelected(_ selected: Bool, animated: Bool)
     {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
     }
-    
 }

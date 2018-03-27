@@ -66,7 +66,7 @@ class JsonConverter: NSObject
             {
                 let dicProduct = dic as! NSDictionary
                 let objProduct = getProductsDetails(withData: dicProduct)
-                arrProducts .add(objProduct)
+                arrProducts .add(objProduct )
             }
         }
         return arrProducts
