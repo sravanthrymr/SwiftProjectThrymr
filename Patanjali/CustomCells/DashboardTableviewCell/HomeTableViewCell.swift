@@ -49,6 +49,29 @@ class HomeTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollection
         
         cell.lblProductCost.text = String(format: "\u{20b9} %.2f", objStructProduct.price!)
         cell.imgProduct.image = UIImage(named: "previewBackground")
+        let objProductImage = getImageUrl(arraData: objStructProduct.arrProductImages)
+  
+        if(objProductImage != nil)
+        {
+            if(objProductImage?.dataImage != nil)
+            {
+                cell.imgProduct.image = UIImage.init(data: (objProductImage?.dataImage!)!)
+            }
+            else
+            {
+                DispatchQueue.global(qos: .default).async(execute: {() -> Void in
+                    let dataOfImage = try? Data.init(contentsOf: URL.init(string: (objProductImage?.strImageUrl!)!)!)
+                    if(dataOfImage != nil)
+                    {
+                        objProductImage?.dataImage = dataOfImage
+                        let imageDownloaded = UIImage.init(data: (objProductImage?.dataImage!)!)
+                        DispatchQueue.main.async {
+                            cell.imgProduct.image = imageDownloaded
+                        }
+                    }
+                })
+            }
+        }
         
         return cell
     }
@@ -60,5 +83,21 @@ class HomeTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollection
     {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
+    }
+    
+    func getImageUrl(arraData: NSMutableArray) -> structProductImages?
+    {
+        if arraData.count > 0
+        {
+            for iCnt in 0..<arraData.count
+            {
+                let objStructImage = arraData[iCnt] as? structProductImages
+                if objStructImage?.isDefault == true
+                {
+                    return objStructImage!
+                }
+            }
+        }
+        return (arraData.count > 0) ? arraData[0] as? structProductImages : nil
     }
 }
